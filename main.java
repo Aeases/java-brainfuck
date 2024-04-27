@@ -6,7 +6,7 @@ class BrainFuckInterpretor {
 		int pointer = 0;
 		int bracketLoopStart = -1;
 		Scanner scan = new Scanner(System.in);
-		// String codeInterp = scan.nextLine();
+		String codeInterp = scan.nextLine();
 		// String codeInterp = "+++++[>++++++++++<-]>.";
 		// String codeInterp = "+[----->+++<]>+.+.";
 		
@@ -21,35 +21,23 @@ class BrainFuckInterpretor {
 					break;
 				case '+':
 					brain[pointer]++;
-
-					if (brain[pointer] > 255) {
-						brain[pointer] = 0; // wrapping, java has no unsigned bytes :<
-					}	
-				break;
+					if (brain[pointer] > 255) { brain[pointer] = 0; } // wrapping, java has no unsigned bytes :<
+					break;
 				case '-':
 					brain[pointer]--;
-
-					if (brain[pointer] < 0) {
-						brain[pointer] = 255; // wrapping, java has no unsigned bytes :<
-					}
+					if (brain[pointer] < 0) { brain[pointer] = 255; } // wrapping, java has no unsigned bytes :<
 					break;
 				case '[':
-					if (brain[pointer] == 0) 
-					{
+					if (brain[pointer] == 0) {
 						while (codeInterp.charAt(i) != ']') { i++; }
 					} 
 					else {bracketLoopStart = i;}
-
 					break;
 				case ']':
-					if (brain[pointer] != 0) {
-						i = bracketLoopStart;
-					}
+					if (brain[pointer] != 0) {i = bracketLoopStart;}
 					break;
 				case '.':
 					System.out.print( (char)brain[pointer] );
-					break;
-				default:
 					break;
 			}
 		}
